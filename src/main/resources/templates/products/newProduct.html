@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Mypan - Nuevo Producto</title>
+    </head>
+    <body>
+        <div class="panel panel-default">
+            <form class="form-horizontal" method="POST" style="margin: 10px"
+                  enctype="multipart/form-data" id="fileUploadForm" th:object="${produto}">
+
+                <div class="form-group">
+                    <fieldset>
+                        <div class="form-group row">
+                            <div class="alert alert-danger">
+                                <div >
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-1">
+                                <input value="id" type="text" class="form-control input-sm" id="id" readOnly="readonly" hidden="hidden"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label>Nombre</label>
+                                <input th:field="*{name}" id="produto.name" type="text" class="form-control input-sm" autofocus="autofocus" placeholder="Nombre del producto" maxlength="50"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label>Descrición</label>
+                                <input th:field="*{description}" id="produto.description" type="text" class="form-control input-sm" maxlength="150" placeholder="Descripción del producto"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label>Precio</label>
+                                <input th:field="*{price}" id="produto.price" type="text" class="form-control input-sm" maxlength="150" placeholder="Precio"/>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-4" >
+                                <label>Imagen</label>
+                                <input type="file" class="form-control input-sm" name="uploadFile"/><br/><br/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group row">
+                    <button type="submit" class="btn btn-sm btn-primary" id="btnSubmit" >Salvar</button>
+                </div>
+            </form>
+
+            <div id="result">
+
+            </div>
+
+            <script type="text/javascript" th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
+
+            <script type="text/javascript" th:src="@{/js/main.js}"></script>
+        </div>
+    </body>
+</html>
