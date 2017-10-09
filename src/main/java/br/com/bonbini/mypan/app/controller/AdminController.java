@@ -6,21 +6,16 @@ import br.com.bonbini.mypan.app.entities.BuyOrder;
 import br.com.bonbini.mypan.app.entities.Product;
 import br.com.bonbini.mypan.app.util.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.ws.rs.Produces;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -58,7 +53,7 @@ public class AdminController {
 
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST, consumes = javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA)
-    public String addProduct(@RequestParam("uploadFile") MultipartFile uploadFile, @ModelAttribute Product produto, RedirectAttributes redirectAttributes){
+    public RedirectView addProduct(@RequestParam("uploadFile") MultipartFile uploadFile, @ModelAttribute Product produto, RedirectAttributes redirectAttributes){
         try {
             File basePath = new File(Constantes.UPLOAD_ROOT);
             if (!basePath.exists()) {
@@ -69,11 +64,13 @@ public class AdminController {
             produto.setFile(imageName);
 
             productDao.saveNewProduct(produto);
-            return "sucesso";
+            RedirectView rv = new RedirectView("product/");
+            return rv;
         }
         catch (Exception e) {
             e.printStackTrace();
-            return "erro";
+            RedirectView rv = new RedirectView("product/new");
+            return rv;
         }
     }
 
@@ -113,5 +110,4 @@ public class AdminController {
         redirectView.addStaticAttribute("update", "update");
         return redirectView;
     }
-
 }

@@ -48,11 +48,7 @@ function fire_ajax_submit() {
         cache: false,
         timeout: 600000,
         success: function (data) {
-
-            $("#result").text(data);
-            console.log("SUCCESS : ", data);
-            $("#btnSubmit").prop("disabled", false);
-
+            window.location.href = "http://localhost:7000/mypan/admin/product/new";
         },
         error: function (e) {
 

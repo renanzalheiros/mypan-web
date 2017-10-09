@@ -20,8 +20,6 @@ public class BuyOrderDao {
     MongoTemplate mongoTemplate;
 
     public BuyOrder save(BuyOrder buyOrder) {
-        Date date = new Date();
-        buyOrder.setDate(date);
         mongoTemplate.insert(buyOrder, "BuyOrder");
         return buyOrder;
 

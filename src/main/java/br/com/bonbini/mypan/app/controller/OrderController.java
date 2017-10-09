@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,8 @@ public class OrderController {
     public BuyOrder newOrder(@RequestHeader("user-auth") String auth, @RequestBody BuyOrder buyOrder){
         Login user = loginDao.findByToken(auth);
         if(user != null) {
+            Date date = new Date();
+            buyOrder.setDate(date);
             return buyOrderDao.save(buyOrder);
         }
 

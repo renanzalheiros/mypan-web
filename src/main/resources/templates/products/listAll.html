@@ -20,7 +20,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#">
-                            <span th:object="${username}" th:text="${username}"></span>
+                            <span sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></span>
                         </a>
                     </li>
                 </ul>
@@ -43,6 +43,10 @@
                     </tr>
                 </table>
             </div>
+        </div>
+
+        <div class="container">
+            <a th:href="@{/admin/product/new}" class="btn btn-sm btn-primary">Novo</a>
         </div>
 
 
